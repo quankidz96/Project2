@@ -1,0 +1,44 @@
+html
+    head
+        meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        title HT Sport 
+        link(rel='stylesheet', type='text/css', href='./css/homestyle.css')
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css')
+        link(rel='stylesheet', href='https://pro.fontawesome.com/releases/v5.10.0/css/all.css', integrity='sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p', crossorigin='anonymous')
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js')
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js')
+
+    body
+            .header-logo
+                // logo
+                            
+            // Product-bar
+            nav.navbar.navbar-expand-md.navbar-inverse.sticky-top.bg-light
+                .container-fluid
+                    a.navbar-branch(href='#')
+                            img(src='image/logo.png', height='60')
+                    button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarAuth')
+                        span.navbar-toggler-icon
+                    #navbarProductBar.collapse.navbar-collapse
+                        ul.navbar-nav.mx-auto
+                            li.nav-item
+                                a.nav-link(href='#') H&agrave;ng m&#x1EDB;i
+                            li.nav-item
+                                a.nav-link(href='#') Qu&#x1EA7;n &Aacute;o
+                            li.nav-item
+                                a.nav-link(href='#') C&#x1EA7;u l&ocirc;ng
+                            li.nav-item
+                                a.nav-link(href='#') B&oacute;ng &dstrok;&aacute;
+                            li.nav-item
+                                a.nav-link(href='#') Tenis
+                            li.nav-item
+                                a.nav-link(href='#') Gi&agrave;y d&eacute;p
+                            li.nav-item
+                                a.nav-link(href='#') Thi&#x1EBF;t b&#x1ECB; t&#x1EAD;p
+                            //Shop-cart-btn    
+                            li.nav-item
+                                a.ml-5(href='#')
+                                    button.btn.btn-primary.btn-lg
+                                        i.fas.fa-shopping-cart
+block content                          
