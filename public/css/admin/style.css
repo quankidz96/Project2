@@ -1,0 +1,18 @@
+
+.loginform{
+    display: flex;
+    flex-flow: row;
+    justify-content: center;
+    justify-content: center;
+    align-items:center;
+    position: absolute;
+    margin:0;
+    padding:40px;
+    left: 480px;
+    top:150px;
+    width: 300px;
+    height: 350px;
+    background-color:rgba(25, 24, 24, 0.5);
+    border: 2px solid blue;
+    border-radius: 5px;
+};
