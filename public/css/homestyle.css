@@ -13,6 +13,7 @@ ul, li { list-style:none;}
 	padding: 0.5rem !important;
 	margin: 0 1rem !important;
 }
+
 .navbar li a{
     padding-bottom: 0.5rem !important;
 }
@@ -21,5 +22,4 @@ ul, li { list-style:none;}
     color: #f00;
     padding-bottom: 0.4rem !important ;
 	border-bottom: 0.1rem solid #f00 ;
-}	
-
+}
