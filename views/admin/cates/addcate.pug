@@ -1,0 +1,8 @@
+extends ../layouts/headeradmin 
+
+block headeradmin
+    form(action="/cates/addcate", method="POST" )
+        .form-group
+            label(for='category') Lo&#x1EA1;i h&agrave;ng
+            input.form-control(type='text', placeholder='Nhập loại mặt hàng', name='name')
+        button.btn.btn-primary(type='submit') Submit

@@ -1,0 +1,28 @@
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
+    title Document
+    link(href='../css/homestyle.css', rel='stylesheet', type='text/css', media='screen')
+    
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css')
+    link(rel='stylesheet', href='https://pro.fontawesome.com/releases/v5.10.0/css/all.css', integrity='sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p', crossorigin='anonymous')
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js')
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js')
+  body
+    nav.navbar.navbar-expand-lg.sticky-top.bg-light
+      .container-fluid
+        a.navbar-branch(href='#')
+          img(src='/image/logo.png', height='60')
+        button.navbar-toggler(type='button', data-toggle='collapse', data-target='#navbarAuth')
+          span.navbar-toggler-icon
+        #navbarNav.collapse.navbar-collapse
+          ul.navbar-nav.mx-auto
+            li.nav-item.active
+              a.nav-link(href='products/listproducts') S&#x1EA3;n ph&#x1EA9;m
+            li.nav-item
+              a.nav-link(href='carts/listcarts') &Dstrok;&#x1A1;n h&agrave;ng
+            li.nav-item
+              a.nav-link(href='cates/listcates') Ph&acirc;n lo&#x1EA1;i
+block headeradmin
