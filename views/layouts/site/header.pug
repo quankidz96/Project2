@@ -3,6 +3,7 @@ html
         meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
         title HT Sport 
         link(rel='stylesheet', type='text/css', href='./css/homestyle.css')
+        link(rel='stylesheet', type='text/css', href='./css/grid.css')
         link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css')
         link(rel='stylesheet', href='https://pro.fontawesome.com/releases/v5.10.0/css/all.css', integrity='sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p', crossorigin='anonymous')
         script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
@@ -36,9 +37,16 @@ html
                                 a.nav-link(href='#') Gi&agrave;y d&eacute;p
                             li.nav-item
                                 a.nav-link(href='#') Thi&#x1EBF;t b&#x1ECB; t&#x1EAD;p
+                            //Searchinput
+                            li.search-query
+                                form.form-inline(action="", method="get")
+                                    input.form-control.mr-3(type="text", name="q", placeholder="Tìm kiếm...")
+                                    button.btn.btn-primary.btn-lg(type="submit")
+                                        i.fas.fa-search
                             //Shop-cart-btn    
                             li.nav-item
-                                a.ml-5(href='#')
+                                a.ml-3(href='#')
                                     button.btn.btn-primary.btn-lg
                                         i.fas.fa-shopping-cart
-block content                          
+                            
+block header                          

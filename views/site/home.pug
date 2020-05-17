@@ -1,0 +1,81 @@
+extends ../layouts/site/header
+block header
+    #slide.carousel.slide.mr-5.ml-5(data-ride='carousel')
+        // Indicators
+        ul.carousel-indicators
+            li.active(data-target='#slide', data-slide-to='0')
+            li(data-target='#slide', data-slide-to='1')
+            li(data-target='#slide', data-slide-to='2')
+        // The slideshow
+        .carousel-inner
+            .carousel-item.active
+                img(src='/image/carousel3.jpg', width='1320', height='580')
+            .carousel-item
+                img(src='/image/carousel1.jpg', width='1320', height='580')
+            .carousel-item
+                img(src='/image/carousel2.jpg', width='1320', height='580')
+        // Left and right controls
+        a.carousel-control-prev(href='#slide', data-slide='prev')
+            span.carousel-control-prev-icon
+        a.carousel-control-next(href='#slide', data-slide='next')
+            span.carousel-control-next-icon
+    // products
+    #featured.row.mt-40
+    .container
+        h1.heading1
+            span.maintext Loai San Pham
+            span.subtext  See Our Most featured Products
+        .d-flex.justify-content-around.row
+            .col-md-3.col-sm-6
+                ul.thumbnails
+                    li.itemcontainer
+                        h6 ProductName
+                        .thumbnail
+                            a.linkdetail(href='#')
+                                img(alt='', src='image/product1.jpg')
+                            .descristion
+                                p  Giay the thao hot
+                            .pricetag
+                                .price
+                                .pricenew 100000000
+
+            .col-md-3.col-sm-6
+                ul.thumbnails
+                    li.itemcontainer
+                        h6 ProductName
+                        .thumbnail
+                            a.linkdetail(href='#')
+                                img(alt='', src='image/product1.jpg')
+                            .descristion
+                                p  Giay the thao hot
+                            .pricetag
+                                .price
+                                .pricenew 100000000
+
+            .col-md-3.col-sm-6
+                ul.thumbnails
+                    li.itemcontainer
+                        h6 ProductName
+                        .thumbnail
+                            a.linkdetail(href='#')
+                                img(alt='', src='image/product1.jpg')
+                            .descristion
+                                p  Giay the thao hot
+                            .pricetag
+                                .price
+                                .pricenew 100000000
+
+            .col-md-3.col-sm-6
+                ul.thumbnails
+                    li.itemcontainer
+                        h6 ProductName
+                        .thumbnail
+                            a.linkdetail(href='#')
+                                img(alt='', src='image/product1.jpg')
+                            .descristion
+                                p  Giay the thao hot
+                            .pricetag
+                                .price
+                                .pricenew 100000000
+                        
+        

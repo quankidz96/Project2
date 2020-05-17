@@ -1,0 +1,20 @@
+html
+    head
+        meta(http-equiv="Content-Type", content="text/html;charset=UTF-8")
+        title ADMIN
+        link(rel='stylesheet', type='text/css', href='./css/admin/style.css')
+        link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css')
+        link(rel='stylesheet', href='https://pro.fontawesome.com/releases/v5.10.0/css/all.css', integrity='sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p', crossorigin='anonymous')
+        script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js')
+        script(src='https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js')
+    body       
+        .loginform
+            form(acction='/admin/login', method='POST')
+                .form-group
+                    label(for='email') Email address
+                    input#email.form-control(type='email', placeholder='Enter email')
+                .form-group
+                    label(for='pwd') Password
+                    input#pwd.form-control(type='password', placeholder='Enter password')
+                button.btn.btn-primary(type='asubmit') Login

@@ -1,7 +1,4 @@
-extends ./layouts/home/common
-
-block content
-    #slide.carousel.slide(data-ride='carousel')
+    #slide.carousel.slide.mr-5.ml-5(data-ride='carousel')
         // Indicators
         ul.carousel-indicators
             li.active(data-target='#slide', data-slide-to='0')
@@ -20,3 +17,4 @@ block content
             span.carousel-control-prev-icon
         a.carousel-control-next(href='#slide', data-slide='next')
             span.carousel-control-next-icon
+block slide         
