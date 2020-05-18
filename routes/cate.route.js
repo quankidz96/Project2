@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var controller = require('../controllers/cate.controller')
+var controller = require('../controllers/cate.controller');
 //GET
 router.get('/', controller.index);
 
