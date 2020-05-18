@@ -23,3 +23,14 @@ ul, li { list-style:none;}
     padding-bottom: 0.4rem !important ;
 	border-bottom: 0.1rem solid #f00 ;
 }
+.navbar li button{
+    border: none;
+    background-color: #f8f9fa;
+    color: #007bff;
+
+}
+.navbar li button:hover{
+    color:#f00;
+    padding-bottom: 0.4rem !important ;
+	border-bottom: 0.1rem solid #f00 ;
+}
