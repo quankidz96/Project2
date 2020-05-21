@@ -3,18 +3,19 @@ require('dotenv').config();
 
 var express = require('express');
 var bodyParser = require('body-parser');
-var firebase = require('firebase-admin');
+//var firebase = require('firebase-admin');
 var cates = require('./routes/cate.route');
 var carts = require('./routes/carts.route');
-var admin = require('./routes/admin.route');
+var manager = require('./routes/manager.route');
 
 //firebase
-var serviceAccount = require('./key/project2-c77c1-firebase-adminsdk-ccayy-afb5b5edc9.json')
+// var serviceAccount = require('./key/project2-c77c1-firebase-adminsdk-ccayy-afb5b5edc9.json')
 
-var firebaseAdmin = firebase.initializeApp({
-    credential: firebase.credential.cert(serviceAccount),
-    databaseURL: 'https://project2-c77c1.firebaseio.com'
-})
+// var firebaseAdmin = firebase.initializeApp({
+//     credential: firebase.credential.cert(serviceAccount),
+//     databaseURL: 'https://project2-c77c1.firebaseio.com'
+// });
+// var db = firebase.database();
 
 
 var app = express();
@@ -43,9 +44,12 @@ app.listen(port, function(){
     
 });
 
-function isAuthenticated(){
+function isAuthenticated(req, res, next ){
 
 }
+
+//login
+
 
 //site
 app.get('/', function(req, res){
@@ -56,4 +60,4 @@ app.get('/', function(req, res){
 
 app.use('/cates', cates);
 app.use('/carts', carts);
-app.use('/admin', admin);
+app.use('/admin', manager);

@@ -4,15 +4,12 @@ var controller = require('../controllers/cate.controller');
 //GET
 router.get('/', controller.index);
 
-router.get('/cates/listcates',controller.goindex);
+router.get('/cates/listcates',controller.goIndex);
 
 router.get('/listcates', controller.index);
 
-router.get('/addcate', controller.addcate);
+router.get('/addcate', controller.create);
 
 //POST
-router.post('/addcate', function(req, res){
-    console.log(res.body);
-    res.redirect('/cates/addcate',)
-})
+router.post('/addcate', controller.postCreate);
 module.exports = router;
