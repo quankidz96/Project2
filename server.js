@@ -3,6 +3,7 @@ require('dotenv').config();
 
 var express = require('express');
 var bodyParser = require('body-parser');
+var flash = require('connect-flash');
 //var firebase = require('firebase-admin');
 var cates = require('./routes/cate.route');
 var carts = require('./routes/carts.route');
@@ -35,8 +36,7 @@ app.use(express.static('public'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// parse application/json
-
+app.use(flash());
 
 // listen port
 app.listen(port, function(){
