@@ -8,7 +8,7 @@ var flash = require('connect-flash');
 var cates = require('./routes/cate.route');
 var carts = require('./routes/carts.route');
 var manager = require('./routes/manager.route');
-
+var products = require('./routes/products.route');
 //firebase
 // var serviceAccount = require('./key/project2-c77c1-firebase-adminsdk-ccayy-afb5b5edc9.json')
 
@@ -61,3 +61,4 @@ app.get('/', function(req, res){
 app.use('/cates', cates);
 app.use('/carts', carts);
 app.use('/admin', manager);
+app.use('/products', products);

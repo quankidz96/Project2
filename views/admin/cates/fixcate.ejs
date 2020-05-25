@@ -1,4 +1,6 @@
-<%- include ('../playout/header.ejs') -%>
+<%- include ('../playout/headlink.ejs') -%>
+<link href="/css/homestyle.css" rel="stylesheet" type="text/css" media="screen"/>
+<%- include ('../playout/navbar.ejs') -%>
 <div class="container">   
     <% if(errors) { %>
         <% errors.forEach(function(e){ %>
@@ -11,7 +13,7 @@
         <form action="" method="POST">
             <div class="form-group">
                 <label for="category">Lo&#x1EA1;i h&agrave;ng</label>
-                <input id="category" class="form-control" type="text" placeholder="Nhập loại mặt hàng" name="name", value=<%= data.name%> />
+                <input id="category" class="form-control" type="text" placeholder="Nhập loại mặt hàng" name="name" value="<%= data.name%>"/>
             </div>
             <button class="btn btn-primary" type="submit">Save</button>
             

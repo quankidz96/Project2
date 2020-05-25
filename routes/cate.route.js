@@ -12,6 +12,8 @@ router.get('/listcates', controller.index);
 router.get('/addcate', controller.create);
 
 router.get('/:id/fix-cate', controller.fixCate);
+
+router.get('/:id/delete-cate', controller.deleteCate);
 //POST
 router.post('/:id/fix-cate', validate.checkError, controller.saveFix);
 
