@@ -1,12 +1,12 @@
 <%- include ('../playout/header.ejs') -%>
 <div class="container">
     <% if(msg != '') {%>
-        <div class="alert alert-success"><%= msg%></div>
+        <div class="alert alert-success row"><%= msg%></div>
     <%};%>    
     <% if(errors) { %>
     
         <% errors.forEach(function(e){ %>
-    <div class="alert alert-danger">
+    <div class="alert alert-danger row ">
         <%= e%>    
     </div>
     <%});%>
