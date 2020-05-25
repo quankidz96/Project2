@@ -1,8 +1,8 @@
 <%- include ('../playout/header.ejs') -%>
 <div class="d-flex justify-content-around">
-    <h1>Danh s&aacute;ch lo&#x1EA1;i m&#x1EB7;t h&agrave;ng</h1>
+    <h1>Danh s&aacute;ch m&#x1EB7;t h&agrave;ng</h1>
     <div> </div>
-    <button class="btn btn-primary" onclick="window.location.href='/cates/addcate'">Thêm</button>
+    <button class="btn btn-primary" onclick="window.location.href='/products/addproduct'">Thêm</button>
 </div>
 <% if(msg != '') {%>
     <div class="alert alert-success"><%= msg%></div>
@@ -32,7 +32,7 @@
         <tr>
             <td><%= id%></td>
             <td><%= products[key].name%></td>  
-            <td><%= products[key].name%></td>
+            <td><img src="/<%= products[key].img%>" width="100px" alt=""></td>
             <td><%= products[key].price%></td>
             <td>
                 <a href="/products/<%= products[key].id%>/delete-product">Xo&aacute;</a> | 
