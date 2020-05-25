@@ -4,11 +4,14 @@ require('dotenv').config();
 var express = require('express');
 var bodyParser = require('body-parser');
 var flash = require('connect-flash');
+var multer  = require('multer')
 //var firebase = require('firebase-admin');
 var cates = require('./routes/cate.route');
 var carts = require('./routes/carts.route');
 var manager = require('./routes/manager.route');
 var products = require('./routes/products.route');
+
+var upload = multer({ dest: 'uploads/' })
 //firebase
 // var serviceAccount = require('./key/project2-c77c1-firebase-adminsdk-ccayy-afb5b5edc9.json')
 

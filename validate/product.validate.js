@@ -1,16 +1,24 @@
+
 module.exports.checkError = function (req, res, next){
     var errors = [];
     var regex = /[^a-zA-Z0-9 -]/g;
-    var name = req.body.name
+    var data = req.body
 
-    if (!name){
+    if (!data.name){
         errors.push('Chưa điền tên');
     }
 
-    if (name.match(regex)){
+    if (data.name.match(regex)){
         errors.push('Tên không hợp lệ');
     }
 
+    if(!req.file){
+        errors.push('Cần chọn ảnh đại diện cho sản phẩm');
+    }
+
+    if(!data.price){
+        errors.push('Cần nhập giá cho sản phẩm');
+    }
     if (errors.length){
         res.locals.errors= errors;
         next();

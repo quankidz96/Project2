@@ -1,10 +1,6 @@
 <%- include ('../playout/header.ejs') -%>
-<div class="container">
-    <% if(msg != '') {%>
-        <div class="alert alert-success row"><%= msg%></div>
-    <%};%>    
+<div class="container"> 
     <% if(errors) { %>
-    
         <% errors.forEach(function(e){ %>
     <div class="alert alert-danger row ">
         <%= e%>    
@@ -20,6 +16,5 @@
             <button class="btn btn-primary" type="submit">Submit</button>
         </form>
     </div> 
-    
 </div>
 <%- include ('../playout/footer.ejs') -%>

@@ -12,7 +12,7 @@
     <%});%>
     <% };%>
     <div class="row">
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
             
                 <div class="form-group">
                     <label class="form-label" for="name">Tên</label>
@@ -24,14 +24,14 @@
                 <div class="form-group">
                     <div class="form-group">
                         <label for="img">Ảnh Sản phẩm</label>
-                        <input type="file" class="form-control-file" id="img">
+                        <input type="file" class="form-control-file" id="img" name="avatar">
                       </div>
                 </div>
             
                 <div class="form-group">
                     <label class="form-label" for="price">Giá</label>
                     <div class="controls">
-                        <input type="number" id="price" min="0" class="form-control" name="gia">
+                        <input type="number" id="price" min="0" class="form-control" name="price">
                     </div>
                 </div>
             
@@ -42,7 +42,7 @@
                             <%var id = 0%>
                             <% var keys = Object.keys(cates)%>
                             <% keys.forEach(function(key){id++; %> 
-                                <option value="<%= id%>"><%= cates[key].name%></option>
+                                <option value="<%= cates[key].id%>"><%= cates[key].name%></option>
                             <%})%>
                         </select>
                     </div>
@@ -52,7 +52,7 @@
                     <label class="form-label" for="field-120334">Chi Tiết Sản Phẩm</label>
                     <span class="desc"></span>
                     <div class="controls">
-                        <textarea name="des" id="des" class="form-control autogrow" cols="5" ></textarea>
+                        <textarea name="des" id="des" class="form-control autogrow" cols="5"></textarea>
                     </div>
                 </div>
             
@@ -64,4 +64,3 @@
     
 </div>
 <%- include ('../playout/footer.ejs') -%>
-<!-- <button class="btn btn-primary" type="submit">Submit</button> -->

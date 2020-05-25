@@ -35,9 +35,12 @@ module.exports.postCreate = function(req, res){
         if(res.locals.errors){
             res.render('admin/cates/addcate', {msg: '', error: errors})
         }else{
-            var key = shortid.generate();
-            req.body.id = key;
-            cateRef.child(key).set(req.body);
+            var id = shortid.generate();
+            var data = {
+                id: id,
+                name:req.body.name
+            }
+            cateRef.child(id).set(data);
             res.redirect('/cates/listcates');
         }
         
@@ -45,7 +48,6 @@ module.exports.postCreate = function(req, res){
 
 module.exports.fixCate = function(req, res){
     var id = req.params.id;
-    console.log(id);
     cateRef.on('value', function(snapshot){
         var data = snapshot.val()[id];
         res.render('admin/cates/fixcate', {data:data, errors: null} )
@@ -56,11 +58,15 @@ module.exports.fixCate = function(req, res){
 module.exports.saveFix = function (req, res){
     var errors = res.locals.errors
         if(res.locals.errors){
-            res.render('admin/cates/addcate', {msg: '', error: errors})
+            data = req.body;
+            res.render('admin/cates/addcate', {data:data, error: errors})
         }else{
             var id = req.params.id;
-            req.body.id=id;
-            cateRef.child(id).set(req.body);
+            var data = {
+                id: id,
+                name:req.body.name
+            }
+            cateRef.child(id).set(data);
             res.redirect('/cates/listcates');
         }     
 }
