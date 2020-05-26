@@ -4,6 +4,6 @@ module.exports.login = function(req, res) {
 module.exports.admin = function(req, res){
     res.render('admin/main/index.ejs');
 }
-module.exports.isAuthenticated = function(req, res){
-
+module.exports.isAuthenticated = function(req, res, next){
+    
 }

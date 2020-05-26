@@ -1,4 +1,9 @@
-<%- include ('../playouts/header.ejs')-%>
+<%- include ('../playouts/headlink.ejs')-%>
+
+
+<!-- slide+navbar -->
+<%- include ('../playouts/navbar.ejs')-%>
+
 <div class="carousel slide mr-5 ml-5" id="slide" data-ride="carousel">
     <!-- Indicators-->
     <ul class="carousel-indicators">
@@ -17,77 +22,35 @@
     <a class="carousel-control-next" href="#slide" data-slide="next"><span class="carousel-control-next-icon"></span></a>
 </div>
 <!-- products-->
+<% var catekeys = Object.keys(cates); %>
+<% var productkeys = Object.keys(products); %>
+<% catekeys.forEach(function(cate){var id = 0;%>
 <div class="row mt-40" id="featured"></div>
 <div class="container">
     <h1 class="heading1">
-        <span class="maintext">Loai San Pham</span>
-        <span class="subtext"> See Our Most featured Products</span>
+        <span class="maintext"><%= cates[cate].name %></span>
     </h1>
     <div class="d-flex justify-content-around row">
+        <% productkeys.forEach(function(product){if(id < 5) { if(products[product].cate == cates[cate].id){ id ++ ;  %>
         <div class="col-md-3 col-sm-6">
             <ul class="thumbnails">
                 <li class="itemcontainer">
-                    <h6>ProductName</h6>
-                    <div class="thumbnail"><a class="linkdetail" href="#"><img alt="" src="image/product1.jpg"/></a>
+                    <h6><%= products[product].name%></h6>
+                    <div class="thumbnail"><a class="linkdetail" href="#"><img alt="" src="<%= products[product].img%>"/></a>
                         <div class="descristion">
-                            <p> Giay the thao hot</p>
+                            <p> <%= products[product].des%></p>
                         </div>
                         <div class="pricetag">
                             <div class="price"></div>
-                            <div class="pricenew">100000000</div>
+                            <p class="pricenew"><%= products[product].price%></p>
                         </div>
                     </div>
                 </li>
             </ul>
         </div>
-        <div class="col-md-3 col-sm-6">
-            <ul class="thumbnails">
-                <li class="itemcontainer">
-                    <h6>ProductName</h6>
-                    <div class="thumbnail"><a class="linkdetail" href="#"><img alt="" src="image/product1.jpg"/></a>
-                        <div class="descristion">
-                            <p> Giay the thao hot</p>
-                        </div>
-                        <div class="pricetag">
-                            <div class="price"></div>
-                            <div class="pricenew">100000000</div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <ul class="thumbnails">
-                <li class="itemcontainer">
-                    <h6>ProductName</h6>
-                    <div class="thumbnail"><a class="linkdetail" href="#"><img alt="" src="image/product1.jpg"/></a>
-                        <div class="descristion">
-                            <p> Giay the thao hot</p>
-                        </div>
-                        <div class="pricetag">
-                            <div class="price"></div>
-                            <div class="pricenew">100000000</div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="col-md-3 col-sm-6">
-            <ul class="thumbnails">
-                <li class="itemcontainer">
-                    <h6>ProductName</h6>
-                    <div class="thumbnail"><a class="linkdetail" href="#"><img alt="" src="image/product1.jpg"/></a>
-                        <div class="descristion">
-                            <p> Giay the thao hot</p>
-                        </div>
-                        <div class="pricetag">
-                            <div class="price"></div>
-                            <div class="pricenew">100000000</div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
+        <%}}});%>
     </div>
 </div>
+<%});%>
+<script src="./js/home.js"></script>
 <%- include ('../playouts/footer.ejs')-%>

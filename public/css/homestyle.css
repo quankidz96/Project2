@@ -1,7 +1,7 @@
 
 a {text-decoration: none;}
 ul, li { list-style:none;}
-/* header */
+
 .pager{background-color: #f6f9fa !important;}
 .header-logo{background-color: #fff !important ;}
 .searchbox{margin: 0 !important;}
@@ -30,4 +30,11 @@ ul, li { list-style:none;}
     color:#f00;
     padding-bottom: 0.4rem !important ;
 	border-bottom: 0.1rem solid #f00 ;
+}
+
+.heading1{
+    display:block !important;
+}
+.pricetag{
+    color:#f00;
 }
