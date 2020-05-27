@@ -2,10 +2,11 @@ var express = require('express');
 var router = express.Router();
 var controller = require('../controllers/cate.controller');
 var validate = require('../validate/cate.validate');
+var auth = require('../middlewares/auth.middleware');
 //GET
 router.get('/', controller.index);
 
-router.get('/cates/listcates',controller.goIndex);
+router.get('/cates/listcates', controller.goIndex);
 
 router.get('/listcates', controller.index);
 

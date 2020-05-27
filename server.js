@@ -7,13 +7,14 @@ var flash = require('connect-flash');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
+
 var cates = require('./routes/cate.route');
 var carts = require('./routes/carts.route');
 var manager = require('./routes/manager.route');
 var products = require('./routes/products.route');
 var index = require('./routes/index.route');
 
-
+var auth = require('./middlewares/auth.middleware');
 
 var app = express();
 var port = process.env.PORT;
@@ -29,34 +30,26 @@ app.use(express.static('public'));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
-app.use(cookieParser());
-app.use(flash());
 app.use(session({
-    secret: 'something',
-    resave: true,
-    key: 'UID',
-    saveUninitialized: true
+  secret: 'something',
+  resave: true,
+  key: 'UID',
 }));
-  app.use(passport.initialize());
-  app.use(passport.session());
-  
+app.use(cookieParser());
+
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(flash());
 // listen port
 app.listen(port, function(){
     console.log('Server Starting on port: ' + port);
 });
 
-function isAuthenticated(req, res, next ){
-
-}
-
-//login
-
 //site
 app.use('/', index);
 
 //admin
-app.use('/cates', cates);
-app.use('/carts', carts);
+app.use('/cates', auth.isAuthenticated, cates);
+app.use('/carts', auth.isAuthenticated, carts);
 app.use('/admin', manager);
-app.use('/products', products);
+app.use('/products', auth.isAuthenticated, products);
