@@ -26,23 +26,23 @@
 <% var productkeys = Object.keys(products); %>
 <% catekeys.forEach(function(cate){var id = 0;%>
 <div class="row mt-40" id="featured"></div>
-<div class="container">
-    <h1 class="heading1">
-        <span class="maintext"><%= cates[cate].name %></span>
-    </h1>
-    <div class="d-flex justify-content-around row">
-        <% productkeys.forEach(function(product){if(id < 5) { if(products[product].cate == cates[cate].id){ id ++ ;  %>
-        <div class="col-md-3 col-sm-6">
+<div class="container cates">
+    <h3 class="headingcate mt-2 mb-4 d-flex justify-content-center row">
+        <span class="maintext"><%= cates[cate].name%></span>
+    </h3>
+    <div class="d-flex justify-content-around row productcontainer">
+        <% productkeys.forEach(function(product){if(id < 4) { if(products[product].cate == cates[cate].id){ id ++ ;  %>
+        <div class="col-md-3 col-sm-6 d-flex  justify-content-center">
             <ul class="thumbnails">
                 <li class="itemcontainer">
                     <h6><%= products[product].name%></h6>
                     <div class="thumbnail"><a class="linkdetail" href="#"><img alt="" src="<%= products[product].img%>"/></a>
-                        <div class="descristion">
+                        <div class="descristion ml-2">
                             <p> <%= products[product].des%></p>
                         </div>
                         <div class="pricetag">
                             <div class="price"></div>
-                            <p class="pricenew"><%= products[product].price%></p>
+                            <p class="pricenew ml-2"><%= products[product].price%></p>
                         </div>
                     </div>
                 </li>
