@@ -1,7 +1,7 @@
-var db = require('../db.js');
-var prodRef = db.ref('/products');
-var catesRef = db.ref('/cates');
-var allRef = db.ref('/');
+var firebase = require('../firebase.js');
+var prodRef = firebase.db.ref('/products');
+var catesRef = firebase.db.ref('/cates');
+var allRef = firebase.db.ref('/');
 var shortid = require('shortid');
 var fs = require('fs');
 //GET
@@ -130,14 +130,13 @@ module.exports.saveFix = function(req, res){
                 });
             }
         }
-        catesRef.once('value', function(snapshot){
-            var cates = snapshot.val();
+        allRef.once('value', function(snapshot){
+            var cates = snapshot.val().cates;
             var product = {
                 name:req.body.name,
                 des: req.body.des,
                 price:req.body.price,
-                cate:req.body.cate,
-                img: req.file.path
+                cate:req.body.cate
             }
             res.render('admin/products/fixproduct', {
                 product: product,

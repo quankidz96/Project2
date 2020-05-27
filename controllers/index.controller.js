@@ -1,7 +1,7 @@
-var db = require('../db.js');
-var prodRef = db.ref('/products');
-var catesRef = db.ref('/cates');
-var allRef = db.ref('/');
+var firebase = require('../firebase.js');
+var prodRef = firebase.db.ref('/products');
+var catesRef = firebase.db.ref('/cates');
+var allRef = firebase.db.ref('/');
 module.exports.home = function(req, res){
     allRef.once('value', function(data){
         var products = data.val().products;

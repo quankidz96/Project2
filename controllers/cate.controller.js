@@ -1,5 +1,5 @@
-var db = require('../db.js');
-var cateRef = db.ref('/cates');
+var firebase = require('../firebase.js');
+var cateRef = firebase.db.ref('/cates');
 var shortid = require('shortid');
 
 
