@@ -28,7 +28,6 @@ function signIn(){
     var provider = new firebase.auth.GoogleAuthProvider;
     firebase.auth().signInWithPopup(provider)
             .then(function(data){
-
               var urlpic = user.photoURL;                  
               pic.setAttribute('src', urlpic);
               loginbtn.setAttribute('style', 'display: none; visibility: hidden');

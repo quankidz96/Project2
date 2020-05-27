@@ -57,9 +57,12 @@ module.exports.fixCate = function(req, res){
 
 module.exports.saveFix = function (req, res){
     var errors = res.locals.errors
+    var id = req.params.id;
         if(res.locals.errors){
-            data = req.body;
-            res.render('admin/cates/addcate', {data:data, error: errors})
+            cateRef.on('value', function(snapshot){
+                var data = snapshot.val()[id];
+                res.render('admin/cates/fixcate', {data:data, errors: errors} );
+            });
         }else{
             var id = req.params.id;
             var data = {
