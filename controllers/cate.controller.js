@@ -2,6 +2,19 @@ var firebase = require('../firebase.js');
 var cateRef = firebase.db.ref('/cates');
 var shortid = require('shortid');
 
+function boDau(str) {
+    str = str.toLowerCase();
+    str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+    str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+    str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+    str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+    str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+    str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+    str = str.replace(/đ/g, "d");
+    str = str.replace(/ /g, "-");
+    str = str.replace(/\./g, "-");
+    return str;
+}
 
 
 module.exports.index = function(req, res){
@@ -17,8 +30,7 @@ module.exports.index = function(req, res){
                 errors: null,
                 msg: ''
             });
-        }
-        
+        }   
     });   
 }
 
@@ -36,14 +48,15 @@ module.exports.postCreate = function(req, res){
             res.render('admin/cates/addcate', {msg: '', error: errors})
         }else{
             var id = shortid.generate();
+            var name = req.body.name;
             var data = {
                 id: id,
-                name:req.body.name
+                name: name,
+                namekodau: boDau(name)  
             }
             cateRef.child(id).set(data);
             res.redirect('/cates/listcates');
-        }
-        
+        }  
 }
 
 module.exports.fixCate = function(req, res){
@@ -65,9 +78,11 @@ module.exports.saveFix = function (req, res){
             });
         }else{
             var id = req.params.id;
+            var name = req.body.name;
             var data = {
                 id: id,
-                name:req.body.name
+                name:name,
+                namekodau: boDau(name)
             }
             cateRef.child(id).set(data);
             res.redirect('/cates/listcates');

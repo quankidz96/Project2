@@ -1,7 +1,5 @@
 
 .itemcontainer{
-    width: 220px;
-    height: 300px;
     border-radius: 4px;
     box-shadow: 0 0 4px #c4c4c4;
     display: flex;
@@ -15,4 +13,9 @@
     max-width: 100%;
     vertical-align: middle;
     border: 0;
+}
+
+.imgdetail{
+    height:350px;
+    width:530px;
 }

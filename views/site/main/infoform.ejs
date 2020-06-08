@@ -1,0 +1,97 @@
+<%- include ('../playouts/headlink')-%>
+<link rel="stylesheet" type="text/css" href="../css/homestyle.css" />
+<link rel="stylesheet" type="text/css" href="../css/grid.css" />
+<%- include ('../playouts/navbar')-%>
+
+<div class="container">
+    <div class="row d-flex justify-content mt-5 mb-3 heading">
+        <h3 class="ml-5 align-self-xl-end">Thông tin</h3>
+        <h6 class="ml-2 align-self-xl-end">Xin cung cấp thêm thông tin cho chung tối để đặt hàng</h6>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <form action="" method="post">
+                <div class="form-group">
+                    <label for="name">Tên</label>
+                    <input name="name" type="name" class="form-control" id="email" placeholder="">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input name="email" type="email" class="form-control" id="email" placeholder="">
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Số điện thoại</label>
+                    <input name="phone" type="text" class="form-control" id="phone" placeholder="">
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Địa chỉ</label>
+                    <input name="address" type="text" class="form-control" id="address" placeholder="Tỉnh/Thành Phố">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="mess">Lời nhắn</label>
+                    <div class="controls">
+                        <textarea name="mess" id="mess" class="form-control autogrow" cols="5"></textarea>
+                    </div>
+                </div>
+                  
+                  <button type="submit" class="btn btn-primary">Đặt hàng</button>
+
+            </form>
+        </div>
+
+        <div class="col-md-8">
+            <div class="container">
+                <table class="display table table-striped table-bordered">
+                    <thead class="thead-light" >  
+                        <tr>
+                            <th scope="col">ID</th>
+                            <th scope="col">Tên</th>
+                            <th scope="col-3">Ảnh</th>
+                            <th scope="col">Giá</th>
+                            <th scope="col">Số lượng</th>
+                            <th scope="col">Giá tiền</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% var id = 0; %>
+                        <% var total = 0;%>
+                        <%if(data){%>
+                        <% data.forEach(function(item){ total = total +  item.price; id++; %>
+                        <tr>
+                            <th scope="row" ><%= id%></td>
+                            <td><a href="/detail/<%= item.item.namekodau%>.<%= item.item.id%>.<%= item.item.cate%>"><%= item.item.name%></a></td>  
+                            <td><img src="/<%= item.item.img%>" width="100px" alt=""></td>
+                            <td><%= item.item.price%></td>
+                            <td class="quantity"><input id="<%= item.item.id%>" type="text" size="1" value="<%= item.amount%>" name="quantity[40]" ></td>
+                            <td><%= item.price%></td>
+                            <td>
+                                <a class="updateCart" id="<%= item.item.id%>" href="#">Cập nhật</a> | 
+                                <a class="delCart"   id="<%= item.item.id%>" href="#">Xóa</a>
+                            </td>
+                        </tr>
+                        <% })}; %>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            
+                            <th colspan="5">Tổng giá trị các sản phẩm</td>
+                            <td colspan="1"><%= total%></td>
+                            <td colspan="1"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script src="./js/cart.js"></script>
+<script src="./js/home.js"></script>
+
+<%- include ('../playouts/footer')-%>

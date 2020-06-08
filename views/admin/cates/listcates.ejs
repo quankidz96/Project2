@@ -15,29 +15,29 @@
 </div>
 <%});%>
 <% };%>
-<table class="display table table-hover" id="example">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Tên</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% var id =0 %>
-        <% var keys = Object.keys(cates)%>
-        <% keys.forEach(function(key){ id++; %>
-        <tr>
-            <td><%= id%></td>
-            <td><%= cates[key].name%></td>  
-            <td>
-                <a href="/cates/<%= cates[key].id%>/delete-cate">Xo&aacute;</a> | 
-                <a href="/cates/<%= cates[key].id%>/fix-cate">S&#x1EED;a</a>
-            </td>
-        </tr>
-        <% }); %>
-    </tbody>
-</table>
-
-
+<div class="container">
+    <table class="display table table-striped table-bordered">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Tên</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% var id =0 %>
+            <% var keys = Object.keys(cates)%>
+            <% keys.forEach(function(key){ id++; %>
+            <tr>
+                <td scope="row"><%= id%></td>
+                <td><%= cates[key].name%></td>  
+                <td>
+                    <a href="/cates/<%= cates[key].id%>/delete-cate">Xo&aacute;</a> | 
+                    <a href="/cates/<%= cates[key].id%>/fix-cate">S&#x1EED;a</a>
+                </td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
+</div>
 <%- include ('../playout/footer.ejs') -%>

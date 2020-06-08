@@ -4,6 +4,21 @@ var catesRef = firebase.db.ref('/cates');
 var allRef = firebase.db.ref('/');
 var shortid = require('shortid');
 var fs = require('fs');
+
+function boDau(str) {
+    str = str.toLowerCase();
+    str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
+    str = str.replace(/è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ/g, "e");
+    str = str.replace(/ì|í|ị|ỉ|ĩ/g, "i");
+    str = str.replace(/ò|ó|ọ|ỏ|õ|ô|ồ|ố|ộ|ổ|ỗ|ơ|ờ|ớ|ợ|ở|ỡ/g, "o");
+    str = str.replace(/ù|ú|ụ|ủ|ũ|ư|ừ|ứ|ự|ử|ữ/g, "u");
+    str = str.replace(/ỳ|ý|ỵ|ỷ|ỹ/g, "y");
+    str = str.replace(/đ/g, "d");
+    str = str.replace(/ /g, "-");
+    str = str.replace(/\./g, "-");
+    return str;
+}
+
 //GET
 module.exports.index = function(req, res){
     prodRef.once('value', function(snapshot){
@@ -107,15 +122,16 @@ module.exports.postCreate = function (req, res){
         var save = {
             id:id,
             name:data.name,
+            namekodau: boDau(data.name),
             cate:data.cate,
             des: data.des,
             price: data.price
         }
+           
         save.img=req.file.path.split('\\').slice(1).join('/');
         prodRef.child(id).set(save);
         res.redirect('/products/listproducts');
     }
-
 }
 
 module.exports.saveFix = function(req, res){
@@ -161,6 +177,7 @@ module.exports.saveFix = function(req, res){
             }
             var save = {
                 id:id,
+                namekodau: boDau(data.name),
                 name:data.name,
                 cate:data.cate,
                 des: data.des,
