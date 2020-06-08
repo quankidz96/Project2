@@ -1,0 +1,65 @@
+<%- include ('../playouts/headlink.ejs')-%>
+<link rel="stylesheet" type="text/css" href="./css/homestyle.css" />
+<link rel="stylesheet" type="text/css" href="./css/grid.css" />
+<%- include ('../playouts/navbar.ejs')-%>
+<!-- slide+navbar -->
+   
+
+<div class="container">
+    <% if(msg != '') {%>
+    <div class="alert alert-success"><%= msg%></div>
+    <%};%> 
+    <h6 class=" mt-4 mb-2 d-flex justify-content-start row pathpage">
+        <a href="/">Trang chủ</a>
+        >
+        <a href="/cart">Giỏ hàng</a>
+    </h6>
+    <h3 class="row headingcate mt-5 mb-3">Giỏ hàng của bạn</h3>
+        
+    
+    <table class="display table table-striped table-bordered">
+        <thead class="thead-light" >  
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Tên</th>
+                <th scope="col-3">Ảnh</th>
+                <th scope="col">Giá</th>
+                <th scope="col">Số lượng</th>
+                <th scope="col">Giá tiền</th>
+                <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% var id = 0; %>
+            <% var total = 0;%>
+            <%if(data){%>
+            <% data.forEach(function(item){ total = total +  item.price; id++; %>
+            <tr>
+                <th scope="row" ><%= id%></td>
+                <td><a href="/detail/<%= item.item.namekodau%>.<%= item.item.id%>.<%= item.item.cate%>"><%= item.item.name%></a></td>  
+                <td><img src="/<%= item.item.img%>" width="100px" alt=""></td>
+                <td><%= item.item.price%></td>
+                <td class="quantity"><input id="<%= item.item.id%>" type="text" size="1" value="<%= item.amount%>" name="quantity[40]" ></td>
+                <td><%= item.price%></td>
+                <td>
+                    <a class="updateCart" id="<%= item.item.id%>" href="#">Cập nhật</a> | 
+                    <a class="delCart"   id="<%= item.item.id%>" href="#">Xóa</a>
+                </td>
+            </tr>
+            <% })}; %>
+        </tbody>
+        <tfoot>
+            <tr>
+                
+                <th colspan="5">Tổng giá trị các sản phẩm</td>
+                <td colspan="1"><%= total%></td>
+                <td colspan="1"></td>
+            </tr>
+        </tfoot>
+    </table>
+    <a class="btn btn-primary" href="/orderCart" >Đặt hàng</a>
+</div>
+
+<script src="./js/cart.js"></script>
+<script src="./js/home.js"></script>
+<%- include ('../playouts/footer.ejs')-%>

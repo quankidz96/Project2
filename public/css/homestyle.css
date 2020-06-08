@@ -40,8 +40,36 @@ ul, li {
     /* //border-top: 1px solid #c4c4c4; */
     border-bottom: 1px solid #c4c4c4;
     display:block !important;
-    color:#c4c4c4;
+    color:#6d6d6d;
+}
+
+.heading{
+    border-bottom: 1px solid #c4c4c4;
+
+    color:#6d6d6d;
+}
+.deatildesc{
+    border-bottom: 1px solid #c4c4c4;
+}
+
+.heading5{
+    border-bottom: 1px solid #c4c4c4;
 }
 .pricetag{
     color:#f00;
+}
+.pricenew{
+    margin:0px !important;
+}
+li.active>a{
+    color: #f00;
+    padding-bottom: 0.4rem !important ;
+	border-bottom: 0.1rem solid #f00 ;
+}
+a.activepage{
+    color:red !important;
+}
+
+.footer{
+    background-color:#c7c7ff;
 }

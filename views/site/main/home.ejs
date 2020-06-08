@@ -1,5 +1,6 @@
 <%- include ('../playouts/headlink.ejs')-%>
-
+<link rel="stylesheet" type="text/css" href="./css/homestyle.css" />
+<link rel="stylesheet" type="text/css" href="./css/grid.css" />
 
 <!-- slide+navbar -->
 <%- include ('../playouts/navbar.ejs')-%>
@@ -32,22 +33,20 @@
     </h3>
     <div class="d-flex justify-content-around row productcontainer">
         <% productkeys.forEach(function(product){if(id < 4) { if(products[product].cate == cates[cate].id){ id ++ ;  %>
-        <div class="col-md-3 col-sm-6 d-flex  justify-content-center">
-            <ul class="thumbnails">
+        <ul class="col-md-3 col-sm-6">
                 <li class="itemcontainer">
-                    <h6><%= products[product].name%></h6>
-                    <div class="thumbnail"><a class="linkdetail" href="#"><img alt="" src="<%= products[product].img%>"/></a>
-                        <div class="descristion ml-2">
+                    <h6 class="mt-3 mb-3 "><%= products[product].name%></h6>
+                    <div class="thumbnail m-2"><a class="linkdetail" href="/detail/<%= products[product].namekodau%>.<%= products[product].id%>.<%= cates[cate].id%>"><img alt="" src="<%= products[product].img%>"/></a>
+                        <div class="descristion mt-1 ml-2">
                             <p> <%= products[product].des%></p>
                         </div>
-                        <div class="pricetag">
-                            <div class="price"></div>
-                            <p class="pricenew ml-2"><%= products[product].price%></p>
+                        <div class="pricetag m-2 d-flex justify-content-between">
+                            <p class="pricenew align-self-center"><%= products[product].price%></p>
+                            <a class="btn btn-danger" href="/addtocart/<%= products[product].id%>"><i class="fas fa-cart-plus"></i></a>
                         </div>
                     </div>
                 </li>
-            </ul>
-        </div>
+        </ul>
         <%}}});%>
     </div>
 </div>

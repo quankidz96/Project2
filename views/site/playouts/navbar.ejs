@@ -2,24 +2,24 @@
 
 <body>
     <!-- Product-bar-->
+    <% var catekeys = Object.keys(cates); %>
+    <% var count = 0;%>
     <nav class="navbar navbar-expand-md navbar-inverse sticky-top bg-light">
-        <div class="container-fluid"><a class="navbar-branch" href="#"><img src="image/logo.png" height="60"/></a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarAuth"><span class="navbar-toggler-icon"></span></button>
+        <div class="container-fluid"><a class="navbar-branch" href="/"><img src="/image/logo.png" height="60"/></a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarAuth"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse"
                 id="navbarProductBar">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item"><a class="nav-link" href="#">H&agrave;ng m&#x1EDB;i</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Qu&#x1EA7;n &Aacute;o</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">C&#x1EA7;u l&ocirc;ng</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">B&oacute;ng &dstrok;&aacute;</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Tenis</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Gi&agrave;y d&eacute;p</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Thi&#x1EBF;t b&#x1ECB; t&#x1EAD;p</a></li>
+                    <% catekeys.forEach(function(cate){ count++;%>
+                    <%if(count <= 7) {%>
+                    <li class="nav-item  nav-cate"><a class="nav-link" href="./<%= cates[cate].namekodau%>.<%= cates[cate].id%>"><%= cates[cate].name%></a></li>
+                    <%}});%>
+                    <!-- <li class="nav-item active"><a class="nav-link" href="#">TEST</a></li> -->
                     <!--Searchinput-->
                     <li class="search-query nav-item">
-                        <form class="form-inline" action="" method="get"><input class="form-control mr-3" type="text" name="q" placeholder="Tìm kiếm..." /><button class="btn btn-primary btn-lg" type="submit"><i class="fas fa-search"></i></button></form>
+                        <form class="form-inline" action="/search" method="get"><input class="form-control mr-3" type="text" name="q" placeholder="Tìm kiếm..." /><button class="btn btn-primary btn-lg" type="submit"><i class="fas fa-search"></i></button></form>
                     </li>
                     <!--Shop-cart-btn    -->
-                    <li class="nav-item"><a class="ml-3" href="#"><button class="btn btn-primary btn-lg"><i class="fas fa-shopping-cart"></i></button></a></li>
+                    <li class="nav-item"><button class="btn btn-primary btn-lg ml-3" onclick="window.location.href='/cart'"><i class="fas fa-shopping-cart"></i></button></li>
                 </ul>
             </div>
         </div>

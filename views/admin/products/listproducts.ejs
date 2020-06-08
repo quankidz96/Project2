@@ -4,44 +4,45 @@
     <div> </div>
     <button class="btn btn-primary" onclick="window.location.href='/products/addproduct'">Thêm</button>
 </div>
-<% if(msg != '') {%>
-    <div class="alert alert-success"><%= msg%></div>
-<%};%>    
-<% if(errors) { %>
+    <% if(msg != '') {%>
+        <div class="alert alert-success"><%= msg%></div>
+    <%};%>    
+    <% if(errors) { %>
 
-    <% errors.forEach(function(e){ %>
-<div class="alert alert-danger">
-    <%= e%>    
+        <% errors.forEach(function(e){ %>
+    <div class="alert alert-danger">
+        <%= e%>    
+    </div>
+    <%});%>
+    <% };%>
+<div class="container">
+    <table class="display table table-striped table-bordered">
+        <thead class="thead-light" >  
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col-2">Tên</th>
+                <th scope="col-3">Ảnh</th>
+                <th scope="col-2">Giá</th>
+                <th scope="col-3">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% var id =0 %>
+            <% var keys = Object.keys(products)%>
+            <% keys.forEach(function(key){ id++; %>
+            <tr>
+                <th scope="row" ><%= id%></td>
+                <td><%= products[key].name%></td>  
+                <td><img src="/<%= products[key].img%>" width="100px" alt=""></td>
+                <td><%= products[key].price%></td>
+                <td>
+                    <a href="/products/<%= products[key].id%>/delete-product">Xo&aacute;</a> | 
+                    <a href="/products/<%= products[key].id%>/fix-product">S&#x1EED;a</a>
+                </td>
+            </tr>
+            <% }); %>
+        </tbody>
+    </table>
 </div>
-<%});%>
-<% };%>
-<table class="display table table-hover" id="example">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Tên</th>
-            <th>Ảnh</th>
-            <th>Giá</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        <% var id =0 %>
-        <% var keys = Object.keys(products)%>
-        <% keys.forEach(function(key){ id++; %>
-        <tr>
-            <td><%= id%></td>
-            <td><%= products[key].name%></td>  
-            <td><img src="/<%= products[key].img%>" width="100px" alt=""></td>
-            <td><%= products[key].price%></td>
-            <td>
-                <a href="/products/<%= products[key].id%>/delete-product">Xo&aacute;</a> | 
-                <a href="/products/<%= products[key].id%>/fix-product">S&#x1EED;a</a>
-            </td>
-        </tr>
-        <% }); %>
-    </tbody>
-</table>
-
 
 <%- include ('../playout/footer.ejs') -%>
