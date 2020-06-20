@@ -13,28 +13,26 @@ var storage = multer.diskStorage({
   });
 var upload = multer({ storage: storage });
 
-router.get('/', controller.index);
+router.get('/', controller.listProd);
 
-router.get('/products/listproducts',controller.goIndex);
+router.get('/listproducts', controller.listProd);
 
-router.get('/addproduct', controller.create);
+router.get('/addproduct', controller.createProd);
 
-router.get('/listproducts', controller.index);
+router.get('/:id/delete-product', controller.deleteProd);
 
-router.get('/:id/delete-product', controller.delete);
-
-router.get('/:id/fix-product', controller.fix);
+router.get('/:id/fix-product', controller.updateProd);
 //POST
 router.post('/addproduct', 
     upload.single('avatar'),
-    validate.checkError, 
-    controller.postCreate
+    validate.checkErrorCreate, 
+    controller.postCreateProd
 );
 
 router.post('/:id/fix-product',
     upload.single('avatar'),
-    validate.checkError,
-    controller.saveFix
+    validate.checkErrorUpdate,
+    controller.postUpdateProd
 );
 
 

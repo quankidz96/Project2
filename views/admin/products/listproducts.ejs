@@ -1,48 +1,57 @@
 <%- include ('../playout/header.ejs') -%>
-<div class="d-flex justify-content-around">
-    <h1>Danh s&aacute;ch m&#x1EB7;t h&agrave;ng</h1>
-    <div> </div>
-    <button class="btn btn-primary" onclick="window.location.href='/products/addproduct'">Thêm</button>
-</div>
-    <% if(msg != '') {%>
-        <div class="alert alert-success"><%= msg%></div>
-    <%};%>    
-    <% if(errors) { %>
 
-        <% errors.forEach(function(e){ %>
-    <div class="alert alert-danger">
-        <%= e%>    
-    </div>
-    <%});%>
-    <% };%>
+    
 <div class="container">
-    <table class="display table table-striped table-bordered">
-        <thead class="thead-light" >  
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col-2">Tên</th>
-                <th scope="col-3">Ảnh</th>
-                <th scope="col-2">Giá</th>
-                <th scope="col-3">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% var id =0 %>
-            <% var keys = Object.keys(products)%>
-            <% keys.forEach(function(key){ id++; %>
-            <tr>
-                <th scope="row" ><%= id%></td>
-                <td><%= products[key].name%></td>  
-                <td><img src="/<%= products[key].img%>" width="100px" alt=""></td>
-                <td><%= products[key].price%></td>
-                <td>
-                    <a href="/products/<%= products[key].id%>/delete-product">Xo&aacute;</a> | 
-                    <a href="/products/<%= products[key].id%>/fix-product">S&#x1EED;a</a>
-                </td>
-            </tr>
-            <% }); %>
-        </tbody>
-    </table>
+    <div class="row d-flex justify-content-between mb-2 mt-2">
+        <% if(msg != '') {%>
+            <div class="alert alert-success"><%= msg%></div>
+        <%}else{%>
+            <div></div>
+        <%};%> 
+        <h2>Danh sách hàng hóa</h2>
+        <button class="btn btn-primary" onclick="window.location.href='/products/addproduct'">Thêm</button>
+    </div>
+    <div class="row">
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+               Phân loại hàng 
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <% var catekeys = Object.keys(cates); %>
+                <% catekeys.forEach(function(cate){%>
+                    <a class="dropdown-item" href="?cate=<%= cate%>"><%= cates[cate].name%></a>
+                <%});%>   
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <table class="display table table-striped table-bordered">
+            <thead class="thead-light" >  
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col-2">Tên</th>
+                    <th scope="col-3">Ảnh</th>
+                    <th scope="col-2">Giá</th>
+                    <th scope="col-3">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% var id =0 %>
+                <% products.forEach(function(product){ id++; %>
+                <tr>
+                    <th scope="row" ><%= id%></td>
+                    <td><%= product.name%></td>  
+                    <td><img src="/<%= product.img%>" width="100px" alt=""></td>
+                    <td><%= product.price%></td>
+                    <td>
+                        <a href="/products/<%= product.id%>/delete-product">Xo&aacute;</a> | 
+                        <a href="/products/<%= product.id%>/fix-product">S&#x1EED;a</a>
+                    </td>
+                </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    </div>
 </div>
 
 <%- include ('../playout/footer.ejs') -%>

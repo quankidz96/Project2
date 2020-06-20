@@ -2,18 +2,25 @@
 
 <body>
     <nav class="navbar navbar-expand-lg sticky-top bg-light">
-        <div class="container-fluid"><a class="navbar-branch" href="#"><img src="/image/logo.png" height="60"/></a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarAuth"><span class="navbar-toggler-icon"></span></button>
+        <div class="container-fluid"><a class="navbar-branch" href="/admin"><img src="/image/logo.png" height="60"/></a><button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarAuth"><span class="navbar-toggler-icon"></span></button>
             <div class="collapse navbar-collapse"
                 id="navbarNav">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item active">
-                        <button class="nav-link" onclick="window.location.href='/products/listproducts'">Danh sách sản phẩm</button>
+                    <li class="nav-item active dropdown">
+                        <button class="nav-link dropdown-toggle" onclick="window.location.href='/products/listproducts'">Danh sách sản phẩm</button>
+                        <div class="dropdown-menu">
+                            <a href="products/listproducts" class="dropdown-item">Danh sách</a>
+                            <a href="products/addproduct" class="dropdown-item">Danh sách</a>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <button class="nav-link" onclick="window.location.href='/carts/listcarts'">Đơn đặt hàng</button>
                     </li>
                     <li class="nav-item">
                         <button class="nav-link" onclick="window.location.href='/cates/listcates'">Phân loại</button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link" onclick="window.location.href='/admin/logout'">Đăng xuất</button>
                     </li>
                 </ul>
             </div>

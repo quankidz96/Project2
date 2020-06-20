@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var controller = require('../controllers/index.controller');
-//var validate = require('../validate/index.validate');
+var validate = require('../validate/order.validate');
 
 router.get('/', controller.home);
 
@@ -19,7 +19,7 @@ router.post('/delCart', controller.delCart);
 
 router.get('/orderCart', controller.orderCart);
 
-router.post('/orderCart',controller.postInfo);
+router.post('/orderCart',validate.checkError, controller.postInfo);
 
 
 

@@ -7,7 +7,7 @@ $(document).ready(function(){
             $.post(
                 '/updateCart',
                 {
-                  id      : id,
+                  id: id,
                   amount : amount
                 }, function(data){                     
                   
@@ -22,10 +22,10 @@ $(document).ready(function(){
             $.post(
                 '/delCart',
                 {
-                  id      : id
+                  id: id
                 }, function(data){                     
                   
-                  if(data.st ==1) location.href = "/cart";
+                  if(data.st == 1) location.href = "/cart";
                 }
             ), 'json';
         

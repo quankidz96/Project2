@@ -15,23 +15,23 @@
                 <div class="form-group">
                     <label class="form-label" for="name">Tên</label>
                     <div class="controls">
-                        <input type="text" id="name" class="form-control" name="name">
+                        <input type="text" id="name" class="form-control" name="name" value="<%= product.name%>">
                     </div>
                 </div>
                      
                 <div class="form-group">
-                    <div class="form-group">
-                        <label for="img">Ảnh Sản phẩm</label>
-                         
-                        <input type="file" class="form-control-file" id="img" name="avatar" accept=".png, .jpg, .jpeg">
-                        <img id="showimg"  alt="" width="200px">
+                    <label for="img">Ảnh Sản phẩm</label>
+                    <div class="custom-file">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                        <input type="file" class="custom-file-input" id="img" name="avatar" accept=".png, .jpg, .jpeg">
                     </div>
+                    <img class="mt-2" id="showimg"  alt="" width="200px" style="border: 0;">
                 </div>
             
                 <div class="form-group">
                     <label class="form-label" for="price">Giá</label>
                     <div class="controls">
-                        <input type="number" id="price" min="0" class="form-control" name="price">
+                        <input type="number" id="price" min="0" class="form-control" name="price"  value="<%= product.price%>">
                     </div>
                 </div>
             
@@ -41,9 +41,9 @@
                         <select class="form-control" id="cate" name="cate">
                             <%var id = 0%>
                             <% var keys = Object.keys(cates)%>
-                            <% keys.forEach(function(key){id++; %> 
-                                <option value="<%= cates[key].id%>"><%= cates[key].name%></option>
-                            <%})%>
+                            <% keys.forEach(function(key){id++; %>
+                                <option value="<%= cates[key].id%>" <%= (key == product.cate) ? 'selected=\"selected\"' : ''%></option><%= cates[key].name%></option>              
+                            <%});%>
                         </select>
                     </div>
                 </div>
@@ -52,16 +52,18 @@
                     <label class="form-label" for="field-120334">Chi Tiết Sản Phẩm</label>
                     <span class="desc"></span>
                     <div class="controls">
-                        <textarea name="des" id="des" class="form-control autogrow" cols="5"></textarea>
+                        <textarea name="des" id="des" class="form-control autogrow" cols="5"><%= product.des%></textarea>
                     </div>
                 </div>
             
-                <div class="text-left">
+                <div class="d-flex justify-content-between">
                     <button type="submit" class="btn btn-primary">Save</button>
+                    <a href="/products/listproducts" class="btn btn-secondary ml-5">Cancel</a>
                 </div>
         </form>
+        
     </div> 
     
 </div>
-<script src="../js/addproduct.js"></script>
+<script src="/js/addproduct.js"></script>
 <%- include ('../playout/footer.ejs') -%>

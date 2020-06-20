@@ -8,6 +8,8 @@ router.get('/listorders', controller.index);
 
 router.get('/:id/view-order', controller.viewOrder);
 
-router.get('/:id/del-order', controller.delOrder)
+router.get('/:id/del-order', controller.delOrder);
+
+router.get('/:id/viewed', controller.viewed);
 //POST
 module.exports = router;

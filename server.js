@@ -3,13 +3,14 @@ require('dotenv').config();
 
 var express = require('express');
 var bodyParser = require('body-parser');
-var expressValidator = require('express-validator');
+
 var flash = require('connect-flash');
 var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var passport = require('passport');
-
-
+var favicon = require('serve-favicon')
+var logger = require('morgan');
+var path = require('path');
 var cates = require('./routes/cates.route');
 var orders = require('./routes/orders.route');
 var manager = require('./routes/manager.route');
@@ -23,13 +24,13 @@ var app = express();
 var port = process.env.PORT
 
 app.set('view engine', 'ejs');
-app.set('views', './views');
+app.set('views', path.join(__dirname, 'views'));
+
 
 //static file
-app.use(express.static('public'));
-
-//body-parser
-// parse application/x-www-form-urlencoded
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(logger('dev'));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.png')));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
@@ -46,12 +47,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use(flash());
-app.use(function(req, res, next){
-	res.locals.success_msg = req.flash('success_msg');
-	res.locals.error_msg = req.flash('error_msg');
-	res.locals.error = req.flash('error');
-	next();
-});
+
+
 // listen port
 app.listen(port, function(){
     console.log('Server Starting on port: ' + port);
@@ -66,3 +63,5 @@ app.use('/cates', auth.isAuthenticated, cates);
 app.use('/orders', auth.isAuthenticated, orders);
 app.use('/admin', manager);
 app.use('/products', auth.isAuthenticated, products);
+
+

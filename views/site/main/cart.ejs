@@ -42,8 +42,8 @@
                 <td class="quantity"><input id="<%= item.item.id%>" type="text" size="1" value="<%= item.amount%>" name="quantity[40]" ></td>
                 <td><%= item.price%></td>
                 <td>
-                    <a class="updateCart" id="<%= item.item.id%>" href="#">Cập nhật</a> | 
-                    <a class="delCart"   id="<%= item.item.id%>" href="#">Xóa</a>
+                    <a class="updateCart" id="<%= item.item.id%>" href="">Cập nhật</a> | 
+                    <a class="delCart"   id="<%= item.item.id%>" href="">Xóa</a>
                 </td>
             </tr>
             <% })}; %>
@@ -57,7 +57,11 @@
             </tr>
         </tfoot>
     </table>
-    <a class="btn btn-primary" href="/orderCart" >Đặt hàng</a>
+    <%if(total === 0){%>
+        <div class="alert alert-primary"> Bạn chưa có hàng trong giỏ hàng</div>
+    <%}else{%>
+        <a class="btn btn-primary" href="/orderCart">Tạo đơn hàng</a>
+    <%};%>
 </div>
 
 <script src="./js/cart.js"></script>

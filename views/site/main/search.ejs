@@ -4,14 +4,26 @@
 <%- include ('../playouts/navbar.ejs')-%>
 
 <div class="container">
-    <h6 class=" mt-2 mb-4 d-flex justify-content-start row">
-        <a href="/">Trang chủ</a>
-        >
-        <p>Tìm kiếm kết quả: <%= query%></p>
-
-    </h6>
+    <%if(!errors){%>
+        <h6 class=" mt-2 mb-4 d-flex justify-content-start row">
+            
+            <a href="/">Trang chủ</a>
+            >
+            <p>Tìm kiếm từ khóa: <%= query%></p>
+        </h6>
+    <%}else{%>        
+        <% errors.forEach(function(e){ %>
+            <div class="row">
+                <div class="col-md-4"></div>
+                <div class="alert alert-danger col-md-4 m-2">
+                    <%= e%>    
+                </div>
+            </div>
+        <%});%>
+    <%}%>
+    
     <div class="row">
-        <div class="col-md-2 list-group " style="height:100%;">
+        <div class="col-md-2 list-group ">
             <ul>
                 <% var catekeys = Object.keys(cates); %>
                 <% catekeys.forEach(function(cate){%>
@@ -20,40 +32,41 @@
             </ul>
         </div>
         <div class="col-md-10">
-            <div class="container cates">
-                
-                <%if(!(products=='')){%>
-                <div class="row productcontainer">
-                    <% products.forEach(function(product){%>
-                        <ul class="col-md-4 col-sm-6 d-flex  justify-content-center">
-                            <li class="itemcontainer">
-                                <h6 class="mt-3 mb-3 "><%= product.name%></h6>
-                                <div class="thumbnail m-2"><a class="linkdetail" href="/detail/<%= product.namekodau%>.<%= product.id%>.<%= product.cate%>"><img alt="" src="../<%= product.img%>"/></a>
-                                    <div class="descristion mt-1 ml-2">
-                                        <p> <%= product.des%></p>
+            <div class="container cates clearfix">       
+                <%if(!errors){%>
+                    <%if(!(products=='')){%>
+                    <div class="row productcontainer">
+                        <% products.forEach(function(product){%>
+                            <ul class="col-md-4 col-sm-6 d-flex  justify-content-center">
+                                <li class="itemcontainer">
+                                    <h6 class="mt-3 mb-3 "><%= product.name%></h6>
+                                    <div class="thumbnail m-2"><a class="linkdetail" href="/detail/<%= product.namekodau%>.<%= product.id%>.<%= product.cate%>"><img alt="" src="../<%= product.img%>"/></a>
+                                        <div class="descristion mt-1 ml-2">
+                                            <p> <%= product.des%></p>
+                                        </div>
+                                        <div class="pricetag m-2 d-flex justify-content-between">
+                                            <p class="pricenew align-self-center"><%= product.price%></p>
+                                            <a class="btn btn-danger" href="/addtocart/<%= product.id%>"><i class="fas fa-cart-plus"></i></a>
+                                        </div>
                                     </div>
-                                    <div class="pricetag m-2 d-flex justify-content-between">
-                                        <p class="pricenew align-self-center"><%= product.price%></p>
-                                        <a class="btn btn-danger" href="/addtocart/<%= product.id%>"><i class="fas fa-cart-plus"></i></a>
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
+                            </ul>
+                        <%});%>
+                    </div>
+                    <!-- Pagination -->
+                    <span id="numpage" style="display:none;visibility:hidden;"><%= page%></span>
+                    <nav aria-label="...">
+                        <ul class="pagination pagination-lg">
+                            <% for (var i =1; i <=amountPage;  i++ ) {%>
+                                <li class="page-item "><a class="page-link" href="?page=<%= i%>"><%= i%></a></li>
+                            <%};%>
                         </ul>
-                    <%});%>
-                </div>
-                <!-- Pagination -->
-                <span id="numpage" style="display:none;visibility:hidden;"><%= page%></span>
-                <nav aria-label="...">
-                    <ul class="pagination pagination-lg">
-                        <% for (var i =1; i <=amountPage;  i++ ) {%>
-                            <li class="page-item "><a class="page-link" href="?page=<%= i%>"><%= i%></a></li>
-                        <%};%>
-                    </ul>
-                </nav>
-
-                <%}else{%>
+                    </nav>
+                    <%}else{%>
                     <h5>Không tìm thấy sản phẩm với tên: <%= query%></h5>
-                <%}%>
+                    <%}%>
+                
+                <%};%>
             </div>
             
         </div>

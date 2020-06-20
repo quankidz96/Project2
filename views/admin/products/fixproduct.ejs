@@ -1,6 +1,5 @@
-<%- include ('../playout/headlink.ejs') -%>
-<link href="/css/homestyle.css" rel="stylesheet" type="text/css" media="screen"/>
-<%- include ('../playout/navbar.ejs') -%>
+<%- include ('../playout/header.ejs') -%>
+
 <div class="container">
     <% if(errors) { %>
         <% errors.forEach(function(e){ %>
@@ -18,18 +17,17 @@
                         <input type="text" id="name" class="form-control" name="name" value="<%= (product ? product.name:'')%>">
                     </div>
                 </div>
-                     
+                                  
                 <div class="form-group">
-                    <div class="form-group">
-                        <label for="img">Ảnh Sản phẩm</label>
-                        <% if(msg != '') {%>
-                        <div class="alert alert-success row"><%= msg%></div>
-                        <%};%>
-                        <input type="file" class="form-control-file" id="img" name="avatar">
-                        <img src="/<%=product.img%>" alt="" width="200px">
+                    <label for="img">Ảnh Sản phẩm</label>
+                    <div class="custom-file">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                        <input type="file" class="custom-file-input" id="img" name="avatar" accept=".png, .jpg, .jpeg">
                     </div>
-                </div> 
-            
+                    <img class="mt-2" id="oldimg"  alt="" src="/<%= product.img%>" width="200px">
+                    <img class="mt-2" id="showimg"  alt="" width="200px" style="border: 0;">
+                </div>
+
                 <div class="form-group">
                     <label class="form-label" for="price">Giá</label>
                     <div class="controls">
@@ -45,7 +43,7 @@
                             <% var keys = Object.keys(cates)%>
                             <% keys.forEach(function(key){id++; %> 
                                 <!-- <option value="<%= cates[key].id%>"><%= cates[key].name%></option> -->
-                                <option value="<%= cates[key].id%>" <%= (cates[key].id == product.cate) ? 'selected=\"selected\"' : ''%>><%= cates[key].name%></option>
+                                <option value="<%= cates[key].id%>" <%= (key == product.cate) ? 'selected=\"selected\"' : ''%>><%= cates[key].name%></option>
                             <%})%>
                         </select>
                     </div>
@@ -59,12 +57,13 @@
                     </div>
                 </div>
             
-                <div class="text-left">
+                <div class="d-flex justify-content-between">
                     <button type="submit" class="btn btn-primary">Save</button>
+                    <a href="/products/listproducts" class="btn btn-secondary">Cancel</a>
                 </div>
         </form>
     </div> 
     
 </div>
+<script src="/js/addproduct.js"></script>
 <%- include ('../playout/footer.ejs') -%>
-<!-- <button class="btn btn-primary" type="submit">Submit</button> -->

@@ -3,25 +3,31 @@
 <link rel="stylesheet" type="text/css" href="../css/grid.css" />
 <%- include ('../playouts/navbar.ejs')-%>
     <section id="product">
-      <div class="container">   
-        <h6 class=" mt-4 mb-2 d-flex justify-content-start row">
-            <a href="/">Trang chủ</a>
-            >
-            <a href="/"><%= data.namecate%></a>
-            >
-            <p>Chi tiết sản phẩm: <%= data.name%></p>
-        </h6>         
+        <div class="container">   
+            <div class="row">
+                <h6 class=" mt-4 mb-2 d-flex justify-content-start">
+                    <a href="/">Trang chủ</a>
+                    >
+                    <a href="/<%= cates[data.cate].namekodau%>.<%= data.cate%>"><%= cates[data.cate].name%></a>
+                    >
+                    <p>Chi tiết sản phẩm: <%= data.name%></p>
+                </h6> 
+            </div>
+                
         <div class="row">     
             <div class="col-md-6"> 
-                  <img class="imgdetail" src="../<%= data.img%>" alt="" title="">            
+                <div>
+                    <img class="imgdetail" src="../<%= data.img%>" alt="" title="" style="height: 400px;">
+                </div>
+                          
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 d-flex flex-column justify-content-between">
                 <h3 class="detailname mb-1"><%= data.name%></h3>
    
                 <h4 class="pricetag pricenew detailpriceb pb"><%= data.price%></h4>
 
                
-                <a class="btn btn-danger"href="/addtocart/<%= data.id%>">
+                <a class="btn btn-danger btn-lg " href="/addtocart/<%= data.id%>" style=" width:250px;">
                     <i class="fas fa-cart-plus"></i>
                     <span>Thêm vào giỏ hàng</span>
                 </a>
@@ -36,7 +42,7 @@
     <!--Sản phẩm cùng loại-->
     
     <div class="container">
-        <div class="row headingcate mb-5">
+        <div class="row headingcate mt-5 mb-3">
             <h3>Các sản phẩm cùng loại</h3>
         </div>
         <%if(!products==''){%>

@@ -18,14 +18,22 @@
             <div class="collapse navbar-collapse"
                 id="navbarNav">
                 <ul class="navbar-nav mx-auto">
-                    <li class="nav-item active">
-                        <button class="nav-link" onclick="window.location.href='/products/listproducts'">Danh sách hàng hóa</button>
+                    <li class="nav-item active dropdown">
+                        <button class="nav-link dropdown-toggle" >Hàng hóa</button>
+                        <div class="dropdown-menu">
+                            <a href="/products/listproducts" class="dropdown-item">Danh sách</a>
+                            <a href="/products/addproduct" class="dropdown-item">Thêm mặt hàng</a>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <button class="nav-link" onclick="window.location.href='/orders/listorders'">Đơn đặt hàng</button>
                     </li>
-                    <li class="nav-item">
-                        <button class="nav-link" onclick="window.location.href='/cates/listcates'">Loại hàng</button>
+                    <li class="nav-item active dropdown">
+                        <button class="nav-link dropdown-toggle">Phân loại hàng</button>
+                        <div class="dropdown-menu">
+                            <a href="/cates/listcates" class="dropdown-item">Danh sách</a>
+                            <a href="/cates/create-cate" class="dropdown-item">Thêm loại hàng</a>
+                        </div>
                     </li>
                     <li class="nav-item">
                         <button class="nav-link" onclick="window.location.href='/admin/logout'">Đăng xuất</button>

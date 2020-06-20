@@ -10,43 +10,47 @@
         <div><span>Email: <%= data.email%></span></div>
         <div><span>Địa chỉ: <%= data.address%></span></div>
         <div><span>Lời nhắn: <%= data.mess%></span></div>
+        <div><span>Thời gian gửi: <%= data.time%></span></div>
+        
     </div>
-    <table class="display table table-striped table-bordered">
-        <thead class="thead-light" >  
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Tên</th>
-                <th scope="col-3">Ảnh</th>
-                <th scope="col">Giá</th>
-                <th scope="col">Số lượng</th>
-                <th scope="col">Giá tiền</th>
-            </tr>
-        </thead>
-        <tbody>
-            <% var id = 0; %>
-            <% var total = 0;%>
-            
-            <% cart.forEach(function(item){ total = total +  item.price; id++; %>
-            <tr>
-                <th scope="row" ><%= id%></td>
-                <td><a href="#"><%= item.item.name%></a></td>  
-                <td><img src="/<%= item.item.img%>" width="100px" alt=""></td>
-                <td><%= item.item.price%></td>
-                <td><%= item.amount%></td>
-                <td><%= item.price%></td>
-            </tr>
-            <% }); %>
-        </tbody>
-        <tfoot>
-            <tr>
-                
-                <th colspan="5">Tổng giá trị các sản phẩm</td>
-                <td colspan="1"><%= total%></td>
-                
-            </tr>
-        </tfoot>
-    </table>
-    <a href="" class="btn btn-primary">Đã Xem</a>
+    <div class="row">
+        <h5>Danh sách sản phẩm</h5>
+    </div>
+     <div class="row">   
+        <table class="display table table-striped table-bordered">
+            <thead class="thead-light" >  
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Tên</th>
+                    <th scope="col-3">Ảnh</th>
+                    <th scope="col">Giá</th>
+                    <th scope="col">Số lượng</th>
+                    <th scope="col">Giá tiền</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% var id = 0; %>
+                <% var total = 0;%> 
+                <% cart.forEach(function(item){ total = total +  item.price; id++; %>
+                <tr>
+                    <th scope="row" ><%= id%></td>
+                    <td><a href="#"><%= item.item.name%></a></td>  
+                    <td><img src="/<%= item.item.img%>" width="100px" alt=""></td>
+                    <td><%= item.item.price%></td>
+                    <td><%= item.amount%></td>
+                    <td><%= item.price%></td>
+                </tr>
+                <%});%>
+            </tbody>
+            <tfoot>
+                <tr>      
+                    <th colspan="5">Tổng giá trị các sản phẩm</td>
+                    <td colspan="1"><%= total%></td>
+                </tr>
+            </tfoot>
+        </table>
+        <a href="/orders/<%= key%>/viewed" class="btn btn-primary">Đã Xem</a>
+    </div>
 </div>
 
 

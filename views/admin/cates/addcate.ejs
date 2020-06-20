@@ -8,12 +8,12 @@
     <%});%>
     <% };%>
     <div class="row">
-        <form action="/cates/addcate" method="POST">
+        <form action="/cates/createcate" method="POST">
             <div class="form-group">
                 <label for="category">Lo&#x1EA1;i h&agrave;ng</label>
-                <input id="category" class="form-control" type="text" placeholder="Nhập loại mặt hàng" name="name"/>
+                <input id="category" class="form-control" type="text" placeholder="Nhập loại mặt hàng" name="name" value="<%= value%>"/>
             </div>
-            <button class="btn btn-primary" type="submit">Submit</button>
+            <button class="btn btn-primary" type="submit">Lưu</button>
         </form>
     </div> 
 </div>

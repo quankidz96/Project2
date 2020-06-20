@@ -1,28 +1,40 @@
 <%- include ('../playout/header.ejs') -%>
 <div class="container">
-    <h1>Danh sách đơn đặt hàng</h1>
-    <table class="display table table-striped" >
-            <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Tên Khách Hàng</th>
-                <th scope="col">Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            <%var id = 0%>
-            <% var keys = Object.keys(orders)%>
-            <% keys.forEach(function(key){id++; %>
-            <tr>
-                <td><%= id%></td>
-                <td><%= orders[key].name%></td>
-                <td>
-                    <a href="/orders/<%= key%>/view-order">Xem</a> |
-                    <a href="/orders/<%= key%>/del-order">Xóa</a>
-                </td>
-                
-            </tr>
-            <%})%>
-        </tbody>
-    </table>
+    <div class="row d-flex justify-content-center">
+    <h2>Danh sách đơn đặt hàng</h2>
+    </div>
+    <div class="row">
+        <table class="display table table-striped table-bordered" >
+            <thead class="thead-light">
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Tên Khách Hàng</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <%var id = 0%>
+                <% var keys = Object.keys(orders)%>
+                <% keys.forEach(function(key){id++; %>
+                <tr>
+                    <td scope="row"><%= id%></td>
+                    <td><%= orders[key].name%></td>
+                    <td><%if(orders[key].status){%>
+                        <p style="color: blue;">Đã xem</p>
+                        <%}else{%>
+                        <p style="color: red;">Chưa xem</p>  
+                        <%}%>
+                    </td>
+                    <td>
+                        <a href="/orders/<%= key%>/view-order">Xem</a> |
+                        <a href="/orders/<%= key%>/del-order">Xóa</a>
+                    </td>
+                </tr>
+                <%})%>
+            </tbody>
+        </table>
+    </div>
+    
 </div>
 <%- include ('../playout/footer.ejs') -%>

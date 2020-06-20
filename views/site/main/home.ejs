@@ -5,7 +5,7 @@
 <!-- slide+navbar -->
 <%- include ('../playouts/navbar.ejs')-%>
 
-<div class="carousel slide mr-5 ml-5" id="slide" data-ride="carousel">
+<div class="carousel slide mr-5 ml-5 mt-2" id="slide" data-ride="carousel">
     <!-- Indicators-->
     <ul class="carousel-indicators">
         <li class="active" data-target="#slide" data-slide-to="0"></li>
@@ -28,8 +28,8 @@
 <% catekeys.forEach(function(cate){var id = 0;%>
 <div class="row mt-40" id="featured"></div>
 <div class="container cates">
-    <h3 class="headingcate mt-2 mb-4 d-flex justify-content-center row">
-        <span class="maintext"><%= cates[cate].name%></span>
+    <h3 class="headingcate mt-4 mb-3 pb-2 row d-flex justify-content-center">
+        <span class="maintext "><%= cates[cate].name%></span>
     </h3>
     <div class="d-flex justify-content-around row productcontainer">
         <% productkeys.forEach(function(product){if(id < 4) { if(products[product].cate == cates[cate].id){ id ++ ;  %>
