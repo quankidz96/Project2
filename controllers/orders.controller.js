@@ -18,12 +18,13 @@ module.exports.goindex = function(req, res){
 module.exports.viewOrder = function(req, res){
     var id = req.params.id;
 
-    ordersRef.orderByKey().equalTo(id).once('child_changed', function(orders){
-        var data = orders.val()[ids];   
+    ordersRef.orderByKey().equalTo(id).once('value', function(orders){
+        var data = orders.val()[id];   
         var cart = Object.values(data.cart);
         res.render('admin/orders/vieworders', {
             data:data,
-            cart:cart
+            cart:cart,
+            key:id
         });
     });
     
@@ -32,6 +33,13 @@ module.exports.viewOrder = function(req, res){
 module.exports.delOrder = function(req, res){
     var id = req.params.id; 
     ordersRef.child(id).remove();
-    res.redirect('/orders')
-    
+    res.redirect('/orders')  
+}
+
+module.exports.viewed = function(req, res){
+    var id = req.params.id;
+    ordersRef.child(id).update({
+        status:1
+    })
+    res.redirect('/orders');
 }

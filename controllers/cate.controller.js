@@ -17,80 +17,88 @@ function boDau(str) {
 }
 
 
-module.exports.index = function(req, res){
+module.exports.listCates = function(req, res){
     cateRef.once('value', function(snapshot){
-        // console.log(snapshot.val());
         var datacates = snapshot.val();
         if(!datacates){
             datacates = {};
+            res.render('admin/cates/listcates', {
+                cates: snapshot.val(),
+                errors: null,
+                msg: req.flash('msg')
+            });
         }
         else{
             res.render('admin/cates/listcates', {
                 cates: snapshot.val(),
                 errors: null,
-                msg: ''
+                msg: req.flash('msg')
             });
         }   
     });   
 }
 
-module.exports.goIndex = function(req, res){
-    res.redirect('/cates/listcates')
+
+module.exports.createCate = function(req, res){
+    res.render('admin/cates/addcate', {errors: null, msg: '',value:''});
 }
 
-module.exports.create = function(req, res){
-    res.render('admin/cates/addcate', {errors: null, msg: ''});
-}
-
-module.exports.postCreate = function(req, res){
+module.exports.postCreateCate = function(req, res,next){
     var errors = res.locals.errors
         if(res.locals.errors){
-            res.render('admin/cates/addcate', {msg: '', error: errors})
+            res.render('admin/cates/addcate', {msg: '', error: errors,value:(req.body.name)?req.body.name:''})
         }else{
-            var id = shortid.generate();
-            var name = req.body.name;
-            var data = {
-                id: id,
-                name: name,
-                namekodau: boDau(name)  
+            id = shortid.generate();
+            name = req.body.name;
+            var cate = {
+                id:id,
+                name:name,
+                namekodau:boDau(name)
             }
-            cateRef.child(id).set(data);
-            res.redirect('/cates/listcates');
+            cateRef.child(id).set(cate).then(function(){
+                req.flash('msg', 'Thêm thành công');
+                res.redirect('/cates/listcates');
+            });
+            
         }  
 }
 
-module.exports.fixCate = function(req, res){
+module.exports.updateCate = function(req, res, next){
     var id = req.params.id;
     cateRef.on('value', function(snapshot){
         var data = snapshot.val()[id];
-        res.render('admin/cates/fixcate', {data:data, errors: null} )
-    })
-    
+        res.render('admin/cates/fixcate', {data:data, errors: null});
+    });
 }
 
-module.exports.saveFix = function (req, res){
+module.exports.postUpdateCate = function (req, res, next){
     var errors = res.locals.errors
     var id = req.params.id;
+    var name = req.body.name;
         if(res.locals.errors){
-            cateRef.on('value', function(snapshot){
+            cateRef.once('value', function(snapshot){
                 var data = snapshot.val()[id];
                 res.render('admin/cates/fixcate', {data:data, errors: errors} );
             });
         }else{
-            var id = req.params.id;
-            var name = req.body.name;
-            var data = {
-                id: id,
+            var cate = {
+                id:id,
                 name:name,
-                namekodau: boDau(name)
+                namekodau:boDau(name)
             }
-            cateRef.child(id).set(data);
-            res.redirect('/cates/listcates');
+            cateRef.child(id).set(cate).then(function(){
+                req.flash('msg', 'Sửa thành công');
+                res.redirect('/cates/listcates');
+            });
         }     
 }
 
-module.exports.deleteCate = function(req, res){
+module.exports.deleteCate = function(req, res, next){
     var id = req.params.id;
-    cateRef.child(id).remove();
-    res.redirect('/cates/listcates');
+    cateRef.child(id).remove().then(function(){
+        req.flash('msg', "Xóa Thành Công")
+        res.redirect('/cates/listcates');
+    });
+    
+    
 }

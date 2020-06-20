@@ -6,11 +6,15 @@ var LocalStrategy = require('passport-local').Strategy;
 
 
 module.exports.login = function(req, res) {
-    res.render('admin/login/index.ejs');
+    res.render('admin/login/index.ejs',{
+        errors : req.flash('err')
+    });
 }
 
 module.exports.admin = function(req, res){
-    res.render('admin/main/index.ejs');
+    res.render('admin/main/index.ejs',{
+        msg: req.flash('msg')
+    });
 }
 
 module.exports.logout = function(req, res){
@@ -19,25 +23,26 @@ module.exports.logout = function(req, res){
 }
 
 module.exports.authenticate = passport.authenticate(
-    'local', { 
+    'login', { 
         successRedirect: '/admin',
         failureRedirect: '/admin/login',
         failureFlash: true 
     });
 
-passport.use(new LocalStrategy(
-    function(username, password, done){ 
+passport.use('login', new LocalStrategy(
+    {passReqToCallback : true},
+    function(req, username, password, done){ 
         adminRef.once('value', function(data){
             if(username == data.val().username) { 
                 bcrypt.compare(password, data.val().password, function(err, result) {
                     if(result){
-                        return done(null, username);
+                        return done(null, username, req.flash('msg', 'Đăng Nhập Thành Công'));
                     }else{
-                        return done(null, false);
+                        return done(null, false, req.flash('err', 'Tên đăng nhập hoặc mật khẩu không đúng'));
                     }
                 });
             } else {
-                return done(null, false); 
+                return done(null, false, req.flash('err', 'Tên đăng nhập hoặc mật khẩu không đúng')); 
             }
         });
     }

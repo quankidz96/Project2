@@ -1,13 +1,13 @@
 var firebase = require('../firebase.js');
+var shortid = require('shortid');
 var prodRef = firebase.db.ref('/products');
 var catesRef = firebase.db.ref('/cates');
 var allRef = firebase.db.ref('/');
 var ordersRef = firebase.db.ref('/orders');
-var shortid = require('shortid');
-
+var Cart = require('../models/Cart')
 
 module.exports.home = function(req, res){
-    allRef.on('value', function(data){
+    allRef.once('value', function(data){
         var products = data.val().products;
         var cates = data.val().cates;
         res.render('site/main/home', {
@@ -65,7 +65,7 @@ module.exports.detail = function(req, res){
                 if(!products.val()){
                     res.render('site/main/showcate',{
                         data:'',
-                        products:'' ,
+                        products:'',
                         cates:cates
                     });
                 }else{
@@ -79,35 +79,10 @@ module.exports.detail = function(req, res){
                 }); 
                 }
             });
-                
-        
     });  
 }
 
 
-function Cart(oldCart){
-	this.items  = oldCart.items || {};
-
-	this.add    = function(id, item){
-		var cart    = this.items[id];
-
-		if(!cart){
-			cart    = this.items[id] = {item: item, amount: 0, price: 0}
-		}
-		cart.amount++;
-		cart.price  = cart.amount * cart.item.price;
-	}
-
-	this.updateCart = function(id, amount){
-		var cart    = this.items[id];
-		cart.amount = amount;
-		cart.price  = cart.item.price * amount;
-	}
-
-	this.delCart = function(id){
-		delete this.items[id];
-	}
-}
 module.exports.addToCart = function(req, res){
     var id      = req.params.id;
     var cart    = new Cart((req.session.cart) ? req.session.cart : {items: {}});
@@ -130,15 +105,14 @@ module.exports.cart = function(req, res){
             cates:cates.val()
         })
     });
-    
 }
 
 module.exports.delCart = function(req, res){
     var id 		= req.body.id;
 	var cart    = new Cart( (req.session.cart) ? req.session.cart : {items: {}} );
 
-	cart.delCart(id);
-	req.session.cart = cart;
+    cart.delCart(id);
+    req.session.cart = cart;
 	res.json({st: 1});
 }
 
@@ -169,11 +143,12 @@ module.exports.orderCart = function(req, res){
 }
 
 module.exports.postInfo = function(req, res){
-    
+    if(res.locals.errors){
+
+    }
     var cart = new Cart(req.session.cart)
     var data = cart.items
-    console.log(data);
-    
+    var d = new Date();
     var order = {
         name: req.body.name,
         phone: req.body.phone,
@@ -181,9 +156,9 @@ module.exports.postInfo = function(req, res){
         address: req.body.address,
         mess: req.body.mess,
         cart:data,
+        time:d.toLocaleString(),
         status:0
     }
-    console.log(order)
     var id = shortid.generate();
     ordersRef.push(order).then(function(){
         req.session.cart = null;

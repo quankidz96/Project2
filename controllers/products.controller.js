@@ -20,36 +20,43 @@ function boDau(str) {
 }
 
 //GET
-module.exports.index = function(req, res){
-    prodRef.once('value', function(snapshot){
-        // console.log(snapshot.val());
-        products = snapshot.val();
-        if(!products){
-            products = {
-                empty:{
-                    name:'Empty',
-                    price :'0',
-                    img :'image/download.jpg'
-                }    
-            };
-        }   
-        res.render('admin/products/listproducts', {
-            products: products,
-            errors: null,
-            msg: ''
-        });
+module.exports.listProd = function(req, res){
+    var idcate = req.query.cate || null ;
+    catesRef.once('value', function(snapshot){
+        var cates = snapshot.val();
+        if(idcate){
+            prodRef.orderByChild('cate').equalTo(idcate).once('value', function(data){
+                products = Object.values(data.val());
+                res.render('admin/products/listproducts', {
+                    products: products,
+                    cates:cates,
+                    errors: null,
+                    msg: req.flash('msg')
+                });
+            });
+        }else{
+            prodRef.once('value', function(data){
+                products = Object.values(data.val());
+                res.render('admin/products/listproducts', {
+                    products: products,
+                    cates:cates,
+                    errors: null,
+                    msg: req.flash('msg')
+                });
+            });
+        }
+        
+       
     });   
     
 }
 
-module.exports.goIndex = function(req, res){
-    res.redirect('/products/listproducts')
-}
 
-module.exports.create = function (req, res){
+module.exports.createProd = function (req, res){
     catesRef.once('value', function(snapshot){
         var cates = snapshot.val();
         res.render('admin/products/addproduct', {
+            product:{},
             cates:cates,
             errors: null,
             msg: ''
@@ -57,7 +64,7 @@ module.exports.create = function (req, res){
     });
 }
 
-module.exports.delete = function(req, res){
+module.exports.deleteProd = function(req, res){
     var id= req.params.id;
     prodRef.once('value', function(snapshot){
         var path = './public/' + snapshot.val()[id].img;
@@ -68,12 +75,14 @@ module.exports.delete = function(req, res){
                 }
             });
         }
-        prodRef.child(id).remove();
-        res.redirect('/products/listproducts');
+        prodRef.child(id).remove().then(function(){
+            res.redirect('/products/listproducts');
+        });
+        
     });       
 }
 
-module.exports.fix = function(req, res){
+module.exports.updateProd = function(req, res){
     var id = req.params.id;
     allRef.once('value', function(data){
         var product = data.val().products[id];
@@ -88,7 +97,7 @@ module.exports.fix = function(req, res){
 }
 
 //POST
-module.exports.postCreate = function (req, res){
+module.exports.postCreateProd = function (req, res){
     if(res.locals.errors) {
         if(req.file){
             var path =  req.file.path.split('\\').join('/');
@@ -128,15 +137,22 @@ module.exports.postCreate = function (req, res){
             price: data.price
         }
            
-        save.img=req.file.path.split('\\').slice(1).join('/');
-        prodRef.child(id).set(save);
-        res.redirect('/products/listproducts');
+        save.img = req.file.path.split('\\').slice(1).join('/');
+        prodRef.child(id).set(save).then(function(){
+            req.flash('msg', 'Thêm sản phẩm thành công');
+            res.redirect('/products/listproducts');
+        }).catch(function(err){
+            console.log('error')
+        });
+        
     }
 }
 
-module.exports.saveFix = function(req, res){
+module.exports.postUpdateProd = function(req, res){
+    var id = req.params.id;
     if(res.locals.errors) {
         if(req.file){
+            // Xóa file ảnh vừa lưu
             var path = './' + req.file.path.split('\\').join('/');
             if (fs.existsSync(path)){
                 fs.unlink(path, function(e){
@@ -148,45 +164,64 @@ module.exports.saveFix = function(req, res){
         }
         allRef.once('value', function(snapshot){
             var cates = snapshot.val().cates;
-            var product = {
-                name:req.body.name,
-                des: req.body.des,
-                price:req.body.price,
-                cate:req.body.cate
-            }
+            var product = snapshot.val().products[id];
             res.render('admin/products/fixproduct', {
                 product: product,
                 cates: cates,
                 errors: res.locals.errors,
-                msg:''
+                msg:req.flash('msg')
             });
         });    
     }
     else{
-        var id = req.params.id;
         var data = req.body;
         var id= req.params.id;
-        prodRef.once('value', function(snapshot){
-            var path = './public/' + snapshot.val()[id].img;
-            if (fs.existsSync(path)){
-                fs.unlink(path, function(e){
-                    if(e){
-                        console.log(e);
-                    }
+        if(req.file){
+            prodRef.once('value', function(snapshot){
+                // Xóa file ảnh cũ
+                var path = './public/' + snapshot.val()[id].img;
+                if (fs.existsSync(path)){
+                    fs.unlink(path, function(e){
+                        if(e){
+                            console.log(e);
+                        }
+                    });
+                }
+                // Lưu dữ liệu mới
+                var save = {
+                    id:id,
+                    namekodau: boDau(data.name),
+                    name:data.name,
+                    cate:data.cate,
+                    des: data.des,
+                    price: data.price
+                }
+                save.img=req.file.path.split('\\').slice(1).join('/');
+                prodRef.child(id).set(save).then(function(){
+                    req.flash('msg', 'Sửa thông tin thành công');
+                    res.redirect('/products/listproducts');
                 });
-            }
-            var save = {
-                id:id,
-                namekodau: boDau(data.name),
-                name:data.name,
-                cate:data.cate,
-                des: data.des,
-                price: data.price
-            }
-            save.img=req.file.path.split('\\').slice(1).join('/');
-            prodRef.child(id).set(save);
-            res.redirect('/products/listproducts');
-        });
+                
+            });
+        }else{
+            prodRef.once('value', function(snapshot){
+                var save = {
+                    id:id,
+                    namekodau: boDau(data.name),
+                    name:data.name,
+                    cate:data.cate,
+                    des: data.des,
+                    price: data.price,
+                    img:snapshot.val()[id].img
+                }
+                prodRef.child(id).set(save).then(function(){
+                    req.flash('msg', 'Sửa thông tin thành công');
+                    res.redirect('/products/listproducts');
+                });
+            });
+        }
+        
+        
         
     }
 }
